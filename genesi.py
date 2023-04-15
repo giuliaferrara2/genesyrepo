@@ -52,7 +52,7 @@ for item in data:
         cron = f"{minute} {hour-2} * * *"
 
         #message = message + f"{hour}:{minute} for {item['id']} - {item['account']}\n"
-        message = message + f"{str(hour).zfill(2)}:{str(minute).zfill(2)} for {str(item['id']).zfill(3)} - {item['account']}\n"
+        message = message + f"{str(hour).zfill(2)}:{str(minute).zfill(2)} for {str(item['id']).zfill(3)} - {item['account']}/{REPO_NAME}\n"
 
         repo = g.get_user().create_repo(REPO_NAME)
         print(f"Repository {REPO_NAME} creata correttamente")
