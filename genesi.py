@@ -124,11 +124,3 @@ TOKEN = os.environ['TELEGRAM_API_TOKEN']
 chat_id = os.environ['TELEGRAM_USERID']
 url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chat_id}&text={message}"
 print(requests.get(url).json()) # this sends the message
-
-
-# Send notification to telegram second account
-print("Send notification to telegram")
-# TOKEN2 = os.environ['A_TELEGRAM_API_TOKEN']
-# chat_id2 = os.environ['A_TELEGRAM_USERID']
-url2 = f"https://api.telegram.org/bot5531437412:AAFl8geNVsT0qgPDsiFKlkFgGd11JRJ6c6c/sendMessage?chat_id=237457681&text={message}"
-print(requests.get(url2).json()) # this sends the message
