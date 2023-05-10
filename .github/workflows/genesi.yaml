@@ -2,7 +2,7 @@ name: Creation
 
 on:
   workflow_dispatch:
-  schedule:
+  #schedule:
     #- cron: '0 19 * * *'
 
 jobs:
