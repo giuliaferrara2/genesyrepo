@@ -10,7 +10,7 @@ from github import Github
 
 # Set the path of the folder to upload to the repository
 FOLDER_PATH = "poseidon"
-filename_original = ".github/workflows/runner.yaml"
+filename_original = ".github/workflows/runner.yml"
 #filename_original_az = ".github/workflows/workflow_orig_az.yml"
 
 ACCOUNTS = os.environ['GH_ACCOUNTS_B64']
