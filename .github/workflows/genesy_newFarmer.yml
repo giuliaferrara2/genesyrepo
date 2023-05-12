@@ -34,4 +34,4 @@ jobs:
         PROXY_USER: ${{ secrets.PROXY_USER }}
         PROXY_PASS: ${{ secrets.PROXY_PASS }}
       run: |
-        python genesi_farmer.py
+        python genesy_farmer.py
