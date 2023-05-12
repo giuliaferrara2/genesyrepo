@@ -82,7 +82,7 @@ for item in data:
         #    file.write(filedata)
 
         ## Add the files from the folder to the repository
-        exclude_list = []
+        exclude_list = ["runner.yaml"]
         for dirname, _, filenames in os.walk(FOLDER_PATH):
             for filename in filenames:
                 if filename in exclude_list:
