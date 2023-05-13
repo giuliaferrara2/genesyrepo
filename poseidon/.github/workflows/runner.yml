@@ -22,7 +22,7 @@ jobs:
         to: ${{ secrets.TELEGRAM_USERID }}
         token: ${{ secrets.TELEGRAM_API_TOKEN }}
         message: |
-          Job for account 21 - triplothe starting!
+          Job for the new account starting!
     - name: Get Accounts
       id: get-accounts
       env:
