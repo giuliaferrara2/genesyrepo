@@ -39,35 +39,35 @@ for item in data:
         for repo in repos:
             repo.delete()
 
-        response = requests.get("https://api.datamuse.com/words", params={"rel_jjb": "cool"})
-        first_word = random.choice(response.json())["word"]
-        response = requests.get("https://api.datamuse.com/words", params={"rel_jjb": "project"})
-        second_word = random.choice(response.json())["word"]
-        REPO_NAME = f"{first_word}-{second_word}"
-        print(REPO_NAME)
+        #response = requests.get("https://api.datamuse.com/words", params={"rel_jjb": "cool"})
+        #first_word = random.choice(response.json())["word"]
+        #response = requests.get("https://api.datamuse.com/words", params={"rel_jjb": "project"})
+        #second_word = random.choice(response.json())["word"]
+        #REPO_NAME = f"{first_word}-{second_word}"
+        #print(REPO_NAME)
 
-        hour = random.randint(startHours, endHours)
-        minute = random.randint(0, 59)
-        #set in UTC
-        cron = f"{minute} {hour-2} * * *"
+        #hour = random.randint(startHours, endHours)
+        #minute = random.randint(0, 59)
+        ##set in UTC
+        #cron = f"{minute} {hour-2} * * *"
 
-        #message = message + f"{hour}:{minute} for {item['id']} - {item['account']}\n"
-        message = message + f"{str(hour).zfill(2)}:{str(minute).zfill(2)} for {str(item['id']).zfill(3)} - {item['account']}/{REPO_NAME}\n"
+        ##message = message + f"{hour}:{minute} for {item['id']} - {item['account']}\n"
+        #message = message + f"{str(hour).zfill(2)}:{str(minute).zfill(2)} for {str(item['id']).zfill(3)} - {item['account']}/{REPO_NAME}\n"
 
-        repo = g.get_user().create_repo(REPO_NAME)
-        print(f"Repository {REPO_NAME} creata correttamente")
+        #repo = g.get_user().create_repo(REPO_NAME)
+        #print(f"Repository {REPO_NAME} creata correttamente")
 
-        print('Add files to repository')
-        filename_output = f".github/workflows/{REPO_NAME}.yml" 
-        with open(os.path.join(FOLDER_PATH, filename_original), 'r') as file :
-            filedata = file.read()
-        filedata = filedata.replace('__name__'      , REPO_NAME)
-        filedata = filedata.replace('__cron__'      , cron)
-        filedata = filedata.replace('__affinity__'  , item["id"])
-        filedata = filedata.replace('__account__'   , item["account"])
-        with open(os.path.join(FOLDER_PATH, filename_output), 'w') as file:
-            file.write(filedata)
-
+        #print('Add files to repository')
+        #filename_output = f".github/workflows/{REPO_NAME}.yml" 
+        #with open(os.path.join(FOLDER_PATH, filename_original), 'r') as file :
+        #    filedata = file.read()
+        #filedata = filedata.replace('__name__'      , REPO_NAME)
+        #filedata = filedata.replace('__cron__'      , cron)
+        #filedata = filedata.replace('__affinity__'  , item["id"])
+        #filedata = filedata.replace('__account__'   , item["account"])
+        #with open(os.path.join(FOLDER_PATH, filename_output), 'w') as file:
+        #    file.write(filedata)
+        #######################################################################
         #print('Add files to repository az')
         ##set in UTC
         #cron = f"{minute} {hour+4} * * *"
@@ -82,38 +82,38 @@ for item in data:
         #    file.write(filedata)
 
         ## Add the files from the folder to the repository
-        exclude_list = ["runner.yaml"]
-        for dirname, _, filenames in os.walk(FOLDER_PATH):
-            for filename in filenames:
-                if filename in exclude_list:
-                    continue
-                file_path = os.path.join(dirname, filename)
-                with open(file_path, "rb") as f:
-                    contents = f.read()
-                file_path_relative = os.path.relpath(file_path, FOLDER_PATH)
-                print(file_path_relative)
-                repo.create_file(file_path_relative, f"Added {file_path_relative}", contents)
-        os.remove(f"{FOLDER_PATH}/{filename_output}")
-        #os.remove(f"{FOLDER_PATH}/{filename_output_az}")
-        print('Add files to repository completed')
+        #exclude_list = ["runner.yaml"]
+        #for dirname, _, filenames in os.walk(FOLDER_PATH):
+        #    for filename in filenames:
+        #        if filename in exclude_list:
+        #            continue
+        #        file_path = os.path.join(dirname, filename)
+        #        with open(file_path, "rb") as f:
+        #            contents = f.read()
+        #        file_path_relative = os.path.relpath(file_path, FOLDER_PATH)
+        #        print(file_path_relative)
+        #        repo.create_file(file_path_relative, f"Added {file_path_relative}", contents)
+        #os.remove(f"{FOLDER_PATH}/{filename_output}")
+        ##os.remove(f"{FOLDER_PATH}/{filename_output_az}")
+        #print('Add files to repository completed')
 
-        print('Creation secret')
-        # Create the secret using the create_secret() method
-        repo.create_secret("GOOGLE_SHEETS_TAB_NAME"         , os.environ['GOOGLE_SHEETS_TAB_NAME'])
-        repo.create_secret("GOOGLE_SHEETS_TOKEN_B64"        , os.environ['GOOGLE_SHEETS_TOKEN_B64'])
-        repo.create_secret("GOOGLE_SHEETS_SHEET_ID"         , os.environ['GOOGLE_SHEETS_SHEET_ID'])
-        repo.create_secret("GOOGLE_SHEETS_CREDENTIALS_B64"  , os.environ['GOOGLE_SHEETS_CREDENTIALS_B64'])
-        repo.create_secret("TELEGRAM_API_TOKEN"             , os.environ['TELEGRAM_API_TOKEN'])
-        repo.create_secret("TELEGRAM_USERID"                , os.environ['TELEGRAM_USERID'])
-        repo.create_secret("GPG_PASSPHRASE"                 , os.environ['GPG_PASSPHRASE'])
+        #print('Creation secret')
+        ## Create the secret using the create_secret() method
+        #repo.create_secret("GOOGLE_SHEETS_TAB_NAME"         , os.environ['GOOGLE_SHEETS_TAB_NAME'])
+        #repo.create_secret("GOOGLE_SHEETS_TOKEN_B64"        , os.environ['GOOGLE_SHEETS_TOKEN_B64'])
+        #repo.create_secret("GOOGLE_SHEETS_SHEET_ID"         , os.environ['GOOGLE_SHEETS_SHEET_ID'])
+        #repo.create_secret("GOOGLE_SHEETS_CREDENTIALS_B64"  , os.environ['GOOGLE_SHEETS_CREDENTIALS_B64'])
+        #repo.create_secret("TELEGRAM_API_TOKEN"             , os.environ['TELEGRAM_API_TOKEN'])
+        #repo.create_secret("TELEGRAM_USERID"                , os.environ['TELEGRAM_USERID'])
+        #repo.create_secret("GPG_PASSPHRASE"                 , os.environ['GPG_PASSPHRASE'])
         #repo.create_secret("CONTAINER_IMAGE"                , os.environ['CONTAINER_IMAGE'])
         #repo.create_secret("CONTAINER_USER"                 , os.environ['CONTAINER_USER'])
-        #repo.create_secret("CONTAINER_PASS"                 , os.environ['CONTAINER_PASS'])
-        repo.create_secret("MATRIX"                         , os.environ['MATRIX'])
-        repo.create_secret("PROXY_USER"                     , os.environ['PROXY_USER'])
-        repo.create_secret("PROXY_PASS"                     , os.environ['PROXY_PASS'])
-        print(f"Secret set correctly in the repository {REPO_NAME}.")
-        print("----------------------------------------------------")
+        ##repo.create_secret("CONTAINER_PASS"                 , os.environ['CONTAINER_PASS'])
+        #repo.create_secret("MATRIX"                         , os.environ['MATRIX'])
+        #repo.create_secret("PROXY_USER"                     , os.environ['PROXY_USER'])
+        #repo.create_secret("PROXY_PASS"                     , os.environ['PROXY_PASS'])
+        #print(f"Secret set correctly in the repository {REPO_NAME}.")
+        #print("----------------------------------------------------")
     except Exception as e:
         # If an error occurs, add the error message to the message string
         message = message + f"{str(item['id']).zfill(3)} - {item['account']} - Error: {str(e)}\n"
